@@ -1,0 +1,17 @@
+for logo and icons : Netflix branding
+
+
+------------- flutter_launcher_icons -------
+
+package flutter_launcher_icons  for launcher icons,
+
+
+don't forget to change at android/app/build.gradle
+minSdk = 21
+
+and then flutter pub run flutter_launcher_icons
+
+
+------------ flutter_native_splash -------
+package flutter_native_splash  for splash screen,
+flutter pub run flutter_native_splash:create
