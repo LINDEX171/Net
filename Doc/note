@@ -15,3 +15,9 @@ and then flutter pub run flutter_launcher_icons
 ------------ flutter_native_splash -------
 package flutter_native_splash  for splash screen,
 flutter pub run flutter_native_splash:create
+
+
+-------package lottie for animation-----
+on pars dans https://lottiefiles.com/ on telecharge
+une animation de type json puis on fait
+flutter pub add lottie
