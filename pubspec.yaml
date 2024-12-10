@@ -71,6 +71,9 @@ flutter:
     - assets/images/symbol.png
     - assets/images/logo.png
     - assets/lotties/netflix.json
+    - assets/images/1.jpg
+    - assets/images/2.jpg
+    - assets/images/3.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

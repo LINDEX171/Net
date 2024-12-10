@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix/widgets/onboarding.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -11,15 +12,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(),
       body: Stack(
         children: [
           PageView(
-            children: [Text("h"), Text("hi"), Text("ho")],
+            children: [
+              Onboarding(title: "title1", subtitle: "page 1 subtitle ", image: "assets/images/2.jpg"),
+              Onboarding(title: "title2", subtitle: "page 2 subtitle ", image: "assets/images/1.jpg"),
+              Onboarding(title: "title3", subtitle: "page 3 subtitle ", image: "assets/images/3.jpg"),
+    ]
           ),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
