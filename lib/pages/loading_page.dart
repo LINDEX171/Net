@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:netflix/pages/home_page.dart';
 import 'package:netflix/pages/myhome_page.dart';
+import 'package:netflix/pages/onboarding_page.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});
@@ -21,14 +22,14 @@ class _LoadingPageState extends State<LoadingPage> {
     super.initState();
     loadAnimation();
   }
-
+//demarrage d'un compte a rebours de 5s
   Future<Timer> loadAnimation() async {
-    return  Timer(Duration(seconds: 4), onLoaded);
+    return  Timer(Duration(seconds: 5), onLoaded);
   }
 
  onLoaded(){
    Navigator.of(context).pushReplacement(
-     MaterialPageRoute(builder: (context) => MyhomePage(),)
+     MaterialPageRoute(builder: (context) => OnboardingPage(),)
    );
  }
 
