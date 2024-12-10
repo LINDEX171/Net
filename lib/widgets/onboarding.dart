@@ -16,7 +16,7 @@ class Onboarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned.fill(child: Image.asset(image,fit: BoxFit.fill,)),
+        Positioned.fill(child: Image.asset(image,fit: BoxFit.cover,)),
         Positioned.fill(child: Container(
           color: Colors.black.withOpacity(0.8),
           child: Column(
