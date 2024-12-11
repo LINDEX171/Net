@@ -24,9 +24,10 @@ class Onboarding extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
           Text(
-            title,style: TextStyle(color: Colors.white, fontSize: 40,fontWeight: FontWeight.bold),),
+            textAlign: TextAlign.center,
+            title, style: TextStyle( color: Colors.white, fontSize: 30,fontWeight: FontWeight.bold),),
           SizedBox(height: 10,),
-          Text(subtitle,style: TextStyle(color: Colors.white, fontSize: 20),)
+          Text(textAlign: TextAlign.center, subtitle,style: TextStyle(color: Colors.white, fontSize: 20),)
         ],),))
       ],
     );

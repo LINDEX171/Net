@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix/pages/loading_page.dart';
 import 'package:netflix/widgets/onboarding.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -17,21 +18,32 @@ class _OnboardingPageState extends State<OnboardingPage> {
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
       appBar: AppBar(
+        toolbarHeight: 80,
          backgroundColor: Colors.transparent,
+        leading: Image.asset("assets/images/symbol.png",),
+        actions: [
+          TextButton(onPressed: () {
+            
+          }, child: Text("Privacy",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+          TextButton(onPressed: () {
+
+          }, child: Text("Help",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
+        ],
       ),
       body: Stack(
         children: [
           PageView(
-            controller: PageController(),
+
+            controller: _pageController,
             onPageChanged: (int index) {
              setState(() {
                _currentPage = index;
              });
             },
             children: [
-              Onboarding(title: "title1", subtitle: "page 1 subtitle ", image: "assets/images/2.jpg"),
-              Onboarding(title: "title2", subtitle: "page 2 subtitle ", image: "assets/images/1.jpg"),
-              Onboarding(title: "title3", subtitle: "page 3 subtitle ", image: "assets/images/3.jpg"),
+              Onboarding(title: "Bienvenue sur Netflix.", subtitle: "Explorez des milliers de films, séries et documentaires, tout cela dans un seul abonnement. ", image: "assets/images/2.jpg"),
+              Onboarding(title: "Créez votre compte en quelques étapes faciles ", subtitle: "Choisissez un plan qui vous convient. Vous pouvez modifier votre abonnement à tout moment", image: "assets/images/1.jpg"),
+              Onboarding(title: "Vous êtes prêt !", subtitle: " Profitez de l’expérience Netflix sur votre téléphone, tablette, ordinateur ou téléviseur. ", image: "assets/images/3.jpg"),
     ]
           ),
           Padding(
@@ -59,7 +71,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 Container(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoadingPage(),));
+                    },
                     child: Text("Get started"),
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
