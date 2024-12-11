@@ -9,6 +9,8 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +22,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
       body: Stack(
         children: [
           PageView(
+            controller: PageController(),
+            onPageChanged: (int index) {
+             setState(() {
+               _currentPage = index;
+             });
+            },
             children: [
               Onboarding(title: "title1", subtitle: "page 1 subtitle ", image: "assets/images/2.jpg"),
               Onboarding(title: "title2", subtitle: "page 2 subtitle ", image: "assets/images/1.jpg"),
@@ -36,17 +44,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   children: List.generate(
                     3,
                     (index) => AnimatedContainer(
-                      duration: Duration(milliseconds: 500),
+                      duration: Duration(milliseconds: 300),
                       margin: EdgeInsets.only(right: 5),
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: _currentPage == index ? Colors.red : Colors.grey,
                         borderRadius: BorderRadius.circular(5),
                       ),
                       height: 10,
-                      width: 10,
+                      width: _currentPage == index ? 15 : 10,
                     ),
                   ),
                 ),
+                SizedBox(height: 20,),
                 Container(
                   width: double.infinity,
                   child: ElevatedButton(
