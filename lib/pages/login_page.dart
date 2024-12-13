@@ -8,6 +8,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+ 
+ 
+   bool _obscureText = true ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 20),
               TextFormField(
-                obscureText: true,
+                obscureText: _obscureText,
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -68,7 +71,13 @@ class _LoginPageState extends State<LoginPage> {
                   border: UnderlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide.none),
+                suffixIcon: IconButton(onPressed: () {
+                     setState(() {
+                       _obscureText = !_obscureText;
+                     });
+                }, icon: _obscureText ? Icon(Icons.visibility,color: Colors.white,):Icon(Icons.visibility_off,color: Colors.white,) )
                 ),
+                
               )
             ],
           )),
