@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix/pages/loading_page.dart';
+import 'package:netflix/pages/login_page.dart';
 import 'package:netflix/widgets/onboarding.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -72,7 +73,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoadingPage(),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
                     },
                     child: Text("Get started"),
                     style: ElevatedButton.styleFrom(

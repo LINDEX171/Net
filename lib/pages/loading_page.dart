@@ -27,11 +27,13 @@ class _LoadingPageState extends State<LoadingPage> {
     return  Timer(Duration(seconds: 5), onLoaded);
   }
 
- onLoaded(){
-   Navigator.of(context).pushReplacement(
-     MaterialPageRoute(builder: (context) => OnboardingPage(),)
-   );
- }
+  onLoaded() {
+    print("Animation completed, navigating to OnboardingPage.");
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => OnboardingPage()),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
