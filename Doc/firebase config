@@ -1,0 +1,18 @@
+1)apres avoir creer le projet n'importe ou dans ton
+cli executez : dart pub global activate flutterfire_cli
+2) metter le path qu'il vous donne dans votre : variable d'env
+3)Ensuite, à la racine du répertoire de votre projet Flutter, exécutez cette commande :
+flutterfire configure --project=netflix-c97f0
+4)allez dans android/app/build.gradle on copie l'apllicationId:
+com.example.netflix on colle au niveau du cli
+et apres ca on verras au niveau de lib un fichier nommer:
+firebase_options.dart créé
+5)et apres on installe le package  firebase_core
+6)puis dans main.dart mettre :
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
+}
