@@ -37,15 +37,17 @@ class _LoginPageState extends State<LoginPage> {
               ))
         ],
       ),
-      body: Padding(
+      body:
+      Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
+
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
               child: Column(
             children: [
               SizedBox(
-                height: 60,
+                height: 110,
               ),
               TextFormField(
                 controller: _emailTextField,
@@ -110,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               SizedBox(
-                height: 15,
+                height: 20,
               ),
               SizedBox(
                 width: double.infinity,
@@ -124,7 +126,20 @@ class _LoginPageState extends State<LoginPage> {
                       }
 
                     }, child: Text("Sign In",style: TextStyle(fontSize: 20),)),
-              )
+              ),
+              SizedBox(height: 20,),
+              Text("OR",textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 20),),
+              SizedBox(height: 20,),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(  style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.grey[800],foregroundColor: Colors.white), onPressed: () {
+
+                }, child: Text("Use a Sign-in Code",style: TextStyle(fontSize: 20),)),
+              ),
+              SizedBox(height: 40,),
+              Text("Forgot password ?",style: TextStyle(color: Colors.white,fontSize: 20),),
+              SizedBox(height: 40,),
+              Text("sign in a protected by Google reCAPTCHA to ensure you are nit a bot.LEARN MORE",style: TextStyle(color: Colors.white,fontSize: 17),textAlign: TextAlign.center,)
             ],
           )),
         ),
