@@ -125,10 +125,11 @@ class _LoginPageState extends State<LoginPage> {
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder()),
                         onPressed: _isLoading ? null : () async {
-                          setState(() {
-                            _isLoading == true;
-                          });
                           if (_formKey.currentState!.validate()) {
+
+                            setState(() {
+                              _isLoading == true;
+                            });
                             //do something
                             // print(_emailTextField.text);
                             // print(_passwordTextField.text);
