@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   final _emailTextField = TextEditingController();
   final _passwordTextField = TextEditingController();
   bool _obscureText = true;
+  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,17 +124,27 @@ class _LoginPageState extends State<LoginPage> {
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder()),
-                        onPressed: () async {
-                          //LOGIN
+                        onPressed: _isLoading ? null : () async {
+                          setState(() {
+                            _isLoading == true;
+                          });
                           if (_formKey.currentState!.validate()) {
                             //do something
                             // print(_emailTextField.text);
                             // print(_passwordTextField.text);
+
+                            //LOGIN
                             try {
                               await Auth().loginWithEmailAndPassword(
                                   _emailTextField.text,
                                   _passwordTextField.text);
+                              setState(() {
+                                _isLoading == false;
+                              });
                             } on FirebaseAuthException catch (e) {
+                              setState(() {
+                                _isLoading == false;
+                              });
                               //Message Error
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
@@ -145,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           }
                         },
-                        child: Text(
+                        child: _isLoading ? CircularProgressIndicator(): Text(
                           "Sign In",
                           style: TextStyle(fontSize: 20),
                         )),
