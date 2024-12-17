@@ -133,7 +133,6 @@ class _LoginPageState extends State<LoginPage> {
                               await Auth().loginWithEmailAndPassword(
                                   _emailTextField.text,
                                   _passwordTextField.text);
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
                             } on FirebaseAuthException catch (e) {
                               //Message Error
                               ScaffoldMessenger.of(context)
