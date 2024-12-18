@@ -21,8 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Netflix',
-
-      home: LoadingPage(),
+      home:  LoadingPage(),
     );
   }
 }

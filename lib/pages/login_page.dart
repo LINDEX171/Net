@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:netflix/pages/home_page.dart';
-import 'package:netflix/pages/redirection_page.dart';
 import 'package:netflix/services/firebase/auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,10 +11,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _emailTextField = TextEditingController();
-  final _passwordTextField = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _passwordConfirmController = TextEditingController();
   bool _obscureText = true;
   bool _isLoading = false;
+  bool _isLogin = true ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 110,
                   ),
                   TextFormField(
-                    controller: _emailTextField,
+                    controller: _emailController,
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 20),
                   TextFormField(
-                    controller: _passwordTextField,
+                    controller: _passwordController,
                     obscureText: _obscureText,
                     style: TextStyle(
                       color: Colors.white,
@@ -114,6 +114,46 @@ class _LoginPageState extends State<LoginPage> {
                       return null;
                     },
                   ),
+                  SizedBox(height: 20),
+                  if(!_isLogin) TextFormField(
+                    controller: _passwordConfirmController,
+                    obscureText: _obscureText,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: InputDecoration(
+                        labelText: "Password confirmation",
+                        labelStyle: TextStyle(color: Colors.white),
+                        filled: true,
+                        fillColor: Colors.grey[800],
+                        border: UnderlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide: BorderSide.none),
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                            icon: _obscureText
+                                ? Icon(
+                              Icons.visibility,
+                              color: Colors.white,
+                            )
+                                : Icon(
+                              Icons.visibility_off,
+                              color: Colors.white,
+                            ))),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "please enter password";
+                      }
+                      else if (value != _passwordController.text) {
+                        return "the two password doesn't match";
+                      }
+                      return null;
+                    },
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -128,23 +168,32 @@ class _LoginPageState extends State<LoginPage> {
                           if (_formKey.currentState!.validate()) {
 
                             setState(() {
-                              _isLoading == true;
+                              _isLoading = true;
                             });
                             //do something
-                            // print(_emailTextField.text);
-                            // print(_passwordTextField.text);
+                            // print(_emailController.text);
+                            // print(_passwordController.text);
 
                             //LOGIN
                             try {
-                              await Auth().loginWithEmailAndPassword(
-                                  _emailTextField.text,
-                                  _passwordTextField.text);
-                              setState(() {
-                                _isLoading == false;
-                              });
+                              if(_isLogin) {
+                                await Auth().loginWithEmailAndPassword(
+                                    _emailController.text,
+                                    _passwordController.text,);
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                              }else {
+                                await Auth().createUserWithEmailAndPassword(
+                                    _emailController.text,
+                                    _passwordController.text);
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                              }
                             } on FirebaseAuthException catch (e) {
                               setState(() {
-                                _isLoading == false;
+                                _isLoading = false;
                               });
                               //Message Error
                               ScaffoldMessenger.of(context)
@@ -157,15 +206,15 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           }
                         },
-                        child: _isLoading ? CircularProgressIndicator(): Text(
-                          "Sign In",
+                        child: _isLoading ? CircularProgressIndicator(color: Colors.red,): Text(
+                          _isLogin ? "Sign In" : "Register",
                           style: TextStyle(fontSize: 20),
                         )),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  if(_isLogin)Text(
                     "OR",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 20),
@@ -175,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    child: ElevatedButton(
+                    child: _isLogin ? ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(),
                             backgroundColor: Colors.grey[800],
@@ -184,23 +233,62 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           "Use a Sign-in Code",
                           style: TextStyle(fontSize: 20),
-                        )),
+                        )) : null,
                   ),
                   SizedBox(
                     height: 40,
                   ),
-                  Text(
+                  if(_isLogin)Text(
                     "Forgot password ?",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   SizedBox(
                     height: 40,
                   ),
-                  Text(
+                  if(_isLogin)Text(
                     "sign in a protected by Google reCAPTCHA to ensure you are not a bot.LEARN MORE",
                     style: TextStyle(color: Colors.white, fontSize: 17),
                     textAlign: TextAlign.center,
-                  )
+                  ),
+                  _isLogin ? SizedBox(
+                    height: 40,
+                  ) : SizedBox(
+                    height: 0,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                     _isLogin ? Text(
+                        "J'ai pas de compte,",
+                        style: TextStyle(color: Colors.white, fontSize: 17, ),
+                        textAlign: TextAlign.center,
+                      ) : Text(
+                       "J'ai un compte,",
+                       style: TextStyle(color: Colors.white, fontSize: 17, ),
+                       textAlign: TextAlign.center,
+                     ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _emailController.text = "";
+                            _passwordController.text = "";
+                            _passwordConfirmController.text = "";
+                            _isLogin = !_isLogin ;
+                          });
+                         // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  RegisterPage(),));
+                      }, child: _isLogin ?  Text(
+                        "s'inscrire",
+                        style: TextStyle(color: Colors.red, fontSize: 17, ),
+                        textAlign: TextAlign.center,
+                      ): Text(
+                        "Login",
+                        style: TextStyle(color: Colors.red, fontSize: 17, ),
+                        textAlign: TextAlign.center,
+                      ) ,)
+                    ],
+                  ),
+
                 ],
               )),
         ),
