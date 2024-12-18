@@ -105,3 +105,32 @@ ElevatedButton(
 
 
 
+
+
+
+
+
+
+
+
+
+----------------------**** Sign-in with Google ****----------------------
+1)on pars dans firebase/authentification/methode_de_connexion
+j'active google , nom du projet netflix , puis enregistrer
+2)on installe le package google_sign_in
+3)dans parametres du projet /empreinte de certificat / consulter les instructions
+4)on vient dans la partie : Pour obtenir l'empreinte du certificat de débogage:
+on choisis (windows ou fenetre) on copie:
+keytool -list -v -alias androiddebugkey -keystore "%USERPROFILE%\.android\debug.keystore"
+5)j'ouvre mon cmd dans le disque D: je colle Enter keystore password:
+, puis apres j'ecris android
+6)je repars dans firebase j'ajoute une empreinte :
+ je copie le sha1 qui ce trouve au niveau de mon cmd et je colle ca
+ j'appuis sur enregistrer ,
+ et puis j'ajoute un autre empreinte :
+  je copie le sha256 qui ce trouve au niveau de mon cmd et je colle ca
+  j'appuis sur enregistrer ,
+
+7)au niveau du code on ajoute un elevatedbutton.icon et on mets l'icone
+de google
+8)on pars dans le fichier services/firebase/auth.dart on ajoute
