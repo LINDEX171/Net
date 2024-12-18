@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
           )),
           ElevatedButton(
               onPressed: () {
-                Auth().logout();
+                Auth().signOutWithGoogle();
 
               },
               child: Text("logout"))
