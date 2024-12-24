@@ -1,4 +1,3 @@
-# netflix
 
 A new Flutter Clone.
 
