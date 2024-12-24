@@ -1,6 +1,6 @@
 # netflix
 
-A new Flutter project.
+A new Flutter Clone.
 
 ## Getting Started
 
